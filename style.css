@@ -1,15 +1,30 @@
 :root {
-    --green: #1b4332;
+    /* Brighter, more appealing neon green */
+    --green: #00c67a;        /* primary vibrant green */
+    --green-dark: #058a60;   /* darker green for borders */
+    --green-rgb: 0,198,122;  /* RGB used for rgba text-shadows */
     --gold: #d4af37;
     --white: #ffffff;
-}
+    --base-font-size: 16px;
+    --base-line-height: 1.55;
+    --heading-line-height: 1.12;
+    --heading-letter-spacing: -0.02em;
+    --body-letter-spacing: 0.01em;
+    --text-shadow-subtle: 0 0.5px rgba(0,0,0,0.02);
+} 
 
 body {
     margin: 0;
     /* Use Inter (webfont) with a system fallback for smooth, consistent rendering */
     font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", Ubuntu, Cantarell, "Fira Sans", "Droid Sans", sans-serif;
-    color: #333;
+    color: #111827; /* slightly darker for crisper text */
     scroll-behavior: smooth; /* This makes the scroll look professional */
+
+    /* Improved typography defaults */
+    font-weight: 400;
+    font-size: clamp(15px, 1.3vw, 17px);
+    line-height: 1.6;
+    letter-spacing: 0.01em;
 
     /* Font smoothing / rendering improvements */
     -webkit-font-smoothing: antialiased; /* WebKit (Chrome, Safari) */
@@ -24,7 +39,36 @@ body {
     font-kerning: normal;
 }
 
+/* Make CTAs and cards feel stronger with medium weight */
+.cta-main, .cta-secondary, .card { font-weight: 600; }
+
+/* Slightly improved paragraph/lead text */
+p.lead { font-size: 1.05rem; color: #0f1724; }
+
 /* Personalization styles and dark theme */
+/* Typography tuning moved into the top :root for consistency */
+
+
+
+/* Headings */
+h1,h2,h3,h4 {
+    line-height: var(--heading-line-height);
+    letter-spacing: var(--heading-letter-spacing);
+    font-weight: 700;
+    text-shadow: var(--text-shadow-subtle);
+    margin: 0.5em 0;
+    -webkit-font-smoothing: antialiased;
+    font-optical-sizing: auto;
+}
+
+/* Hero title tweak */
+.hero .hero-content h1 {
+    font-weight: 800;
+    font-size: clamp(1.8rem, 5vw, 3.2rem);
+    letter-spacing: -0.015em;
+    margin-bottom: 0.5rem;
+}
+
 .personalize {
     margin: 16px 0;
     display: flex;
@@ -84,6 +128,56 @@ body.dark-theme .cta-main {
     border-radius: 5px;
     margin-top: 20px;
 }
+
+/* Neon green glow utility for text */
+.glow-green {
+    color: var(--green) !important;
+    /* layered strong neon text-shadow using the vibrant green */
+    text-shadow:
+        0 0 2px rgba(var(--green-rgb),0.95),
+        0 0 8px rgba(var(--green-rgb),0.85),
+        0 0 18px rgba(var(--green-rgb),0.65),
+        0 0 36px rgba(var(--green-rgb),0.45),
+        0 0 72px rgba(var(--green-rgb),0.28);
+    filter: drop-shadow(0 0 8px rgba(var(--green-rgb),0.6)) drop-shadow(0 0 22px rgba(var(--green-rgb),0.32));
+    -webkit-text-stroke: 0.35px rgba(0,0,0,0.12);
+}
+.glow-green.animated {
+    animation: neon-pulse 1.8s ease-in-out infinite;
+}
+@keyframes neon-pulse {
+    0%,100% {
+        text-shadow:
+            0 0 2px rgba(var(--green-rgb),0.9),
+            0 0 10px rgba(var(--green-rgb),0.8),
+            0 0 24px rgba(var(--green-rgb),0.6),
+            0 0 52px rgba(var(--green-rgb),0.35);
+    }
+    50% {
+        text-shadow:
+            0 0 6px rgba(var(--green-rgb),1),
+            0 0 18px rgba(var(--green-rgb),0.95),
+            0 0 36px rgba(var(--green-rgb),0.8),
+            0 0 72px rgba(var(--green-rgb),0.5);
+    }
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .glow-green.animated { animation: none; }
+}
+
+/* Strong neon on hover for green CTAs */
+.cta-secondary:hover, .cta-secondary:focus {
+    color: var(--green);
+    text-shadow:
+        0 0 4px rgba(27,67,50,0.95),
+        0 0 12px rgba(27,67,50,0.8),
+        0 0 28px rgba(27,67,50,0.5);
+    filter: none;
+    outline: none;
+}
+
 @keyframes pulse {
     0% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
     50% { box-shadow: 0 0 0 8px rgba(212,175,55,0.18); }
@@ -106,11 +200,19 @@ body.dark-theme .cta-main {
 .contact-form textarea { width: 100%; max-width: 460px; padding: 10px; border-radius: 6px; border: 1px solid #ccc; }
 .contact-form .cta-main { padding: 12px 26px; }
 .contact-actions { display:flex; gap:8px; align-items:center; justify-content:center; flex-wrap:wrap; }
-.cta-secondary { background: transparent; color: var(--green); border: 1px solid var(--green); padding: 10px 16px; border-radius:6px; cursor: pointer; }
+.cta-secondary { background: linear-gradient(180deg, rgba(var(--green-rgb),0.03), transparent); color: var(--green); border: 1px solid var(--green-dark); padding: 10px 16px; border-radius:6px; cursor: pointer; box-shadow: 0 2px 8px rgba(var(--green-rgb),0.06) inset; }
 .cta-secondary[disabled] { opacity: 0.6; cursor: not-allowed; }
 @media (min-width: 700px) {
   .contact-form { flex-direction: row; gap: 12px; align-items: flex-start; }
   .contact-form textarea { order: 3; width: 100%; max-width: none; }
+}
+
+/* Calendly responsive tweaks */
+.calendly-inline { display:flex; justify-content:center; }
+.calendly-inline .calendly-inline-widget { width:100%; max-width:720px; border-radius:8px; overflow:hidden; box-shadow: 0 6px 20px rgba(17,24,39,0.08); }
+@media (max-width: 640px) {
+  .calendly-inline { height: 600px; }
+  .calendly-inline .calendly-inline-widget { height: 600px; }
 }
 
 #wholesaler { background-color: #f9f9f9; }

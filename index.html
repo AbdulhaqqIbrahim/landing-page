@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clearview | Predictable Lead Flow</title>
+    <title>Clearview Real Estate Services | Predictable Lead Flow</title>
     <!-- Fonts: Inter for smoother rendering -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Preload the Google Fonts stylesheet to reduce FOUT -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" as="style" onload="this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,7 +17,7 @@
     <!-- HERO SECTION -->
     <header class="hero">
         <nav>
-            <div class="logo">CLEARVIEW</div>
+            <div class="logo glow-green animated" aria-label="Clearview Real Estate Services" title="Clearview Real Estate Services">CLEARVIEW Real Estate Services</div>
         </nav>
         
         <div class="hero-content">
@@ -77,15 +79,17 @@
             <input id="contactEmail" name="email" type="email" placeholder="Email address" required />
             <textarea id="contactMessage" name="message" placeholder="Tell us about your goals" rows="4"></textarea>
 
-            <!-- Optional API endpoint to POST submissions to -->
-            <input id="apiEndpoint" name="apiEndpoint" type="url" placeholder="API endpoint (optional)" />
-
             <div class="contact-actions">
               <button type="submit" class="cta-main">Request Call</button>
               <button id="mailtoBtn" type="button" class="cta-secondary">Send via Email</button>
-              <button id="apiSubmitBtn" type="button" class="cta-secondary">Submit to API</button>
             </div>
         </form>
+
+        <!-- Calendly Inline Widget -->
+        <div id="calendly-inline" class="calendly-inline" style="min-width:320px;height:700px;margin-top:24px;" aria-label="Schedule a 30 minute call">
+            <div class="calendly-inline-widget" data-url="https://calendly.com/abdulhaqq-ibrahim27-compscihigh/30min?primary_color=25ff00" style="min-width:320px;height:700px;"></div>
+        </div>
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
         <p id="contactThanks" class="greeting" aria-live="polite"></p> 
     </section>
 

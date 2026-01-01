@@ -110,7 +110,14 @@
     if (mainCTA) {
       mainCTA.addEventListener('click', (e) => {
         e.preventDefault();
-        if (contactSection) {
+        // Prefer scrolling to Calendly widget if present, otherwise fallback to contact section
+        const calendly = document.getElementById('calendly-inline');
+        if (calendly) {
+          calendly.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          try { calendly.setAttribute('tabindex', '-1'); calendly.focus({ preventScroll: true }); } catch (err) { calendly.focus(); }
+          mainCTA.classList.add('pulse');
+          setTimeout(() => mainCTA.classList.remove('pulse'), 1000);
+        } else if (contactSection) {
           contactSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
           try { contactName && contactName.focus({ preventScroll: true }); } catch (err) { contactName && contactName.focus(); }
           mainCTA.classList.add('pulse');
@@ -156,46 +163,7 @@
       window.location.href = mailto;
     });
 
-    // Submit to a provided API endpoint (must support CORS)
-    const apiSubmitBtn = document.getElementById('apiSubmitBtn');
-    apiSubmitBtn && apiSubmitBtn.addEventListener('click', async (e) => {
-      e.preventDefault();
-      const endpoint = (document.getElementById('apiEndpoint') || {}).value || '';
-      const name = (document.getElementById('contactName') || {}).value || '';
-      const email = (document.getElementById('contactEmail') || {}).value || '';
-      const message = (document.getElementById('contactMessage') || {}).value || '';
 
-      if (!endpoint.trim()) {
-        contactThanks.textContent = 'Enter an API endpoint URL to submit.';
-        return;
-      }
-      if (!email.trim()) {
-        contactThanks.textContent = 'Email is required to submit to the API.';
-        return;
-      }
-
-      apiSubmitBtn.disabled = true; apiSubmitBtn.textContent = 'Sending...';
-      contactThanks.textContent = '';
-      try {
-        const resp = await fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, message })
-        });
-        if (resp.ok) {
-          contactThanks.textContent = `Success${name ? ', ' + name : ''}! Your request was submitted to the API.`;
-          safeSetLocalStorage(LS_KEYS.NAME, name.trim());
-          contactForm.reset();
-        } else {
-          const text = await resp.text().catch(() => resp.statusText || 'Response not OK');
-          contactThanks.textContent = `API error: ${resp.status} ${text}`;
-        }
-      } catch (err) {
-        contactThanks.textContent = `Network error / CORS issue: ${err.message}`;
-        console.error('API submit failed', err);
-      }
-      apiSubmitBtn.disabled = false; apiSubmitBtn.textContent = 'Submit to API';
-    });
 
   });
 })();
