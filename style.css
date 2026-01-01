@@ -1,0 +1,133 @@
+:root {
+    --green: #1b4332;
+    --gold: #d4af37;
+    --white: #ffffff;
+}
+
+body {
+    margin: 0;
+    /* Use Inter (webfont) with a system fallback for smooth, consistent rendering */
+    font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", Ubuntu, Cantarell, "Fira Sans", "Droid Sans", sans-serif;
+    color: #333;
+    scroll-behavior: smooth; /* This makes the scroll look professional */
+
+    /* Font smoothing / rendering improvements */
+    -webkit-font-smoothing: antialiased; /* WebKit (Chrome, Safari) */
+    -moz-osx-font-smoothing: grayscale;  /* macOS Firefox */
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "liga" 1, "kern" 1;
+    font-synthesis: weight style;
+    -webkit-text-size-adjust: 100%;
+
+    /* Optical sizing and kerning (Inter supports optical sizing) */
+    font-optical-sizing: auto;
+    font-kerning: normal;
+}
+
+/* Personalization styles and dark theme */
+.personalize {
+    margin: 16px 0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#nameInput {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    min-width: 160px;
+}
+.greeting {
+    margin-top: 10px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: inherit;
+}
+body.dark-theme {
+    background: #0b0b0d;
+    color: #f3f3f3;
+}
+body.dark-theme .card {
+    border-color: rgba(255,255,255,0.12);
+}
+body.dark-theme .cta-main {
+    background-color: #222;
+    color: #fff;
+}
+.theme-label { margin-left:8px; margin-right:4px; }
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(27, 67, 50, 0.9), rgba(27, 67, 50, 0.9)), 
+                url('images.unsplash.com');
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-align: center;
+    padding: 20px;
+}
+
+.cta-main {
+    background-color: var(--gold);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
+    50% { box-shadow: 0 0 0 8px rgba(212,175,55,0.18); }
+    100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
+}
+.pulse {
+    animation: pulse 900ms ease-out forwards;
+} 
+
+/* Sections */
+.audience-section {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+/* Contact form */
+.contact-section { max-width: 900px; margin: 0 auto; }
+.contact-form { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.contact-form input,
+.contact-form textarea { width: 100%; max-width: 460px; padding: 10px; border-radius: 6px; border: 1px solid #ccc; }
+.contact-form .cta-main { padding: 12px 26px; }
+.contact-actions { display:flex; gap:8px; align-items:center; justify-content:center; flex-wrap:wrap; }
+.cta-secondary { background: transparent; color: var(--green); border: 1px solid var(--green); padding: 10px 16px; border-radius:6px; cursor: pointer; }
+.cta-secondary[disabled] { opacity: 0.6; cursor: not-allowed; }
+@media (min-width: 700px) {
+  .contact-form { flex-direction: row; gap: 12px; align-items: flex-start; }
+  .contact-form textarea { order: 3; width: 100%; max-width: none; }
+}
+
+#wholesaler { background-color: #f9f9f9; }
+#realtor { background-color: var(--white); }
+
+.grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 30px 0;
+}
+
+.card {
+    border: 2px solid var(--gold);
+    padding: 30px;
+    width: 250px;
+    border-radius: 10px;
+    font-weight: bold;
+}

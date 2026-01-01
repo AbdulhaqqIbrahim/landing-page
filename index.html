@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clearview | Predictable Lead Flow</title>
+    <!-- Fonts: Inter for smoother rendering -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <nav>
+            <div class="logo">CLEARVIEW</div>
+        </nav>
+        
+        <div class="hero-content">
+            <h1>Predictable Lead Flow for Real Estate Pros</h1>
+            <p>We scale your business with high-intent leads and CRM automation.</p>
+            
+            <div class="selector-box">
+                <label for="audience">I am a...</label>
+                <select id="audience" onchange="scrollToSection()">
+                    <option value="">Select your role</option>
+                    <option value="wholesaler">Wholesaler / Investor</option>
+                    <option value="realtor">Realtor / Agent</option>
+                </select>
+            </div>
+
+            <!-- Personalization -->
+            <div class="personalize" aria-label="Personalization controls">
+                <label for="nameInput">Your name:</label>
+                <input id="nameInput" type="text" placeholder="Enter your name" />
+                <button id="saveNameBtn" class="btn">Save</button>
+                <label for="themeToggle" class="theme-label">Dark mode</label>
+                <input id="themeToggle" type="checkbox" aria-label="Toggle dark mode" />
+            </div>
+            <p id="greeting" class="greeting" aria-live="polite"></p>
+
+            <button id="ctaMain" class="cta-main">Book Your Free Strategy Call</button>
+            <p class="trust-line">Serving: Cleveland | Oklahoma | NY | NJ | CT</p>
+        </div>
+    </header>
+
+    <!-- WHOLESALER SECTION -->
+    <section id="wholesaler" class="audience-section">
+        <h2>For Wholesalers & Investors</h2>
+        <div class="grid">
+            <div class="card">Direct Seller Leads</div>
+            <div class="card">Deal Analysis Support</div>
+            <div class="card">CRM Setup</div>
+        </div>
+        <button class="cta-gold">Get Investor Leads</button>
+    </section>
+
+    <!-- REALTOR SECTION -->
+    <section id="realtor" class="audience-section">
+        <h2>For Realtors & Agents</h2>
+        <div class="grid">
+            <div class="card">Buyer/Seller Leads</div>
+            <div class="card">Listing Ads</div>
+            <div class="card">Follow-up Automation</div>
+        </div>
+        <button class="cta-gold">Grow Your Listings</button>
+    </section>
+
+    <!-- CONTACT / BOOKING SECTION -->
+    <section id="contact" class="audience-section contact-section" tabindex="-1">
+        <h2>Book Your Free Strategy Call</h2>
+        <p>Fill out the form below and we'll reach out to schedule your free strategy call.</p>
+        <form id="contactForm" class="contact-form">
+            <input id="contactName" name="name" type="text" placeholder="Your name" />
+            <input id="contactEmail" name="email" type="email" placeholder="Email address" required />
+            <textarea id="contactMessage" name="message" placeholder="Tell us about your goals" rows="4"></textarea>
+
+            <!-- Optional API endpoint to POST submissions to -->
+            <input id="apiEndpoint" name="apiEndpoint" type="url" placeholder="API endpoint (optional)" />
+
+            <div class="contact-actions">
+              <button type="submit" class="cta-main">Request Call</button>
+              <button id="mailtoBtn" type="button" class="cta-secondary">Send via Email</button>
+              <button id="apiSubmitBtn" type="button" class="cta-secondary">Submit to API</button>
+            </div>
+        </form>
+        <p id="contactThanks" class="greeting" aria-live="polite"></p> 
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
